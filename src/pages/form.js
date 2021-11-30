@@ -15,6 +15,17 @@ const FormPage = (props) => {
     const [country, setCountry] = useState('')
     const [promo, setPromo] = useState('')
     const [other, setOther] = useState('')
+    const [emailLists,setEmailLists]=useState([])
+
+    const addEmailList=()=>{
+        emailLists.push("")
+        setEmailLists([...emailLists])
+    }
+    const removeEmailList=(index)=>{
+        emailLists.slice(index,1)
+        setEmailLists([...emailLists])
+        console.log(emailLists)
+    }
     const selectCountry = (val) => {
         setCountry(val)
     }
@@ -263,7 +274,7 @@ const FormPage = (props) => {
                                                 meta,
                                             }) => (
                                                 <div >
-                                                    <input type="text" placeholder="Email" {...field} className="class-input  input-list" />
+                                                    <input type="email" placeholder="" {...field} className="class-input  input-list" />
                                                     
                                                 </div>
                                             )}
@@ -278,15 +289,54 @@ const FormPage = (props) => {
                                                 meta,
                                             }) => (
                                                 <div>
-                                                    <input type="text" placeholder="Email" {...field} className="class-input  input-list-2" />
+                                                    <input type="email" placeholder="" {...field} className="class-input  input-list-2" />
                                                     
                                                 </div>
                                             )}
                                         </Field>
                                     </label>
-                                    <img className="add-input" src="https://aqiqahcentre.com/wp-content/plugins/gravityforms/images/list-add.svg" />
+                                    <img onClick={()=>addEmailList()} className="add-input" src="https://aqiqahcentre.com/wp-content/plugins/gravityforms/images/list-add.svg" />
 
                                 </div>
+                                {emailLists.map((email,index)=>{
+                                    return(
+                                        <div className="two-inputs">
+                                    <label className="label-class email-two-inputs mt-2 mb-2">
+                                      
+                                        <Field  name="email3" >
+                                            {({
+                                                field,
+                                                form: { touched, errors },
+                                                meta,
+                                            }) => (
+                                                <div >
+                                                    <input type="email" placeholder="" {...field} className="class-input  input-list" />
+                                                    
+                                                </div>
+                                            )}
+                                        </Field>
+                                    </label>
+                                    <label className="label-class mt-2 mb-2">
+                                      
+                                        <Field name="email3" >
+                                            {({
+                                                field,
+                                                form: { touched, errors },
+                                                meta,
+                                            }) => (
+                                                <div>
+                                                    <input type="email" placeholder="" {...field} className="class-input  input-list-2" />
+                                                    
+                                                </div>
+                                            )}
+                                        </Field>
+                                    </label>
+                                    <img className="add-input" onClick={()=>addEmailList()} src="https://aqiqahcentre.com/wp-content/plugins/gravityforms/images/list-add.svg" />
+
+                                </div>
+                                    )
+                                })}
+                                
                             </div>
                             <p className="smaller-text mt-1">Sekiranya anda mendaftar lebih dari satu nama, sila tekan butang ( + ) untuk mengisi nama-nama peserta lain. Isikan bilangan kambing sembelihan bagi memudahkan pembahagian kuantiti setiap peserta.</p>
                             {errors.email2 &&
